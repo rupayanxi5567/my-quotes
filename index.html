@@ -1,240 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quotes Generator</title>
 
-<style>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,500&display=swap");
 
+      * {
+        margin: 0;
 
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,500&display=swap');
+        padding: 0;
 
+        box-sizing: border-box;
 
+        font-family: "Playfair Display", serif;
+      }
 
-*{
-    margin: 0;
+      body {
+        background: #bbc6fa;
+      }
 
-    padding: 0;
+      .quoteBox {
+        background: white;
 
-    box-sizing: border-box;
+        width: 700px;
 
-    font-family: 'Playfair Display', serif;
-}
+        position: absolute;
 
+        top: 50%;
 
+        left: 50%;
 
-body{
-    background: #bbc6fa;
-}
+        transform: translate(-50%, -50%);
 
-.quoteBox{
-    background: white;
+        padding: 40px;
 
-    width: 700px;
+        border-radius: 10px;
 
-    position: absolute;
+        text-align: center;
 
-    top: 50%;
+        box-shadow: 0 10px 20px 0px rgba(0, 0, 0, 0.15);
+      }
 
-    left: 50%;
-
-    transform: translate(-50%, -50%);
-
-    padding: 40px;
-
-    border-radius: 10px;
-
-    text-align: center;
-
-    box-shadow: 0 10px 20px 0px rgba(0, 0, 0, 0.15);
-
-
-}
-
-
-.quoteBox h2{
+      .quoteBox h2 {
         font-size: 32px;
         position: relative;
-        margin-bottom: 40px;        
-}
+        margin-bottom: 40px;
+      }
 
+      .quoteBox h2::after {
+        content: "";
 
-.quoteBox h2::after{
-content: "";
+        width: 75px;
 
-width: 75px;
+        height: 3px;
 
-height: 3px;
+        border-radius: 3px;
 
-border-radius: 3px;
+        background: rgba(23, 124, 229);
 
-background: rgba(23, 124, 229);
+        position: absolute;
 
-position: absolute;
+        bottom: -10px;
 
-bottom: -10px;
+        left: 50%;
 
-left: 50%;
+        transform: translate(-50%);
+      }
 
-transform: translate(-50%);
-}
+      .quoteBox blockquote {
+        font-size: 26px;
 
+        min-height: 110px;
+      }
 
-.quoteBox blockquote{
-    font-size: 26px;
+      .quoteBox blockquote::before,
+      .quoteBox blockquote::after {
+        content: "";
+      }
 
-    min-height: 110px;
-}
+      .quoteBox span {
+        display: block;
 
+        margin-top: 10px;
 
-.quoteBox blockquote::before, .quoteBox blockquote::after{
-    content: "";
+        float: right;
 
+        position: relative;
+      }
 
-}
+      .quoteBox span::before {
+        content: "";
 
-.quoteBox span{
-    display: block;
+        width: 20px;
 
-    margin-top: 10px;
+        height: 2px;
 
-    float: right;
+        background: rgba(23, 124, 229);
 
-    position: relative;
-}
+        position: absolute;
 
-.quoteBox span::before{
-    content: "";
+        top: 50%;
 
-    width: 20px;
+        left: -30px;
+      }
 
-    height: 2px;
+      .quoteBox div {
+        width: 100%;
 
-    background: rgba(23, 124, 229);
+        margin-top: 50px;
 
-    position: absolute;
+        display: flex;
 
-    top: 50%;
+        justify-content: center;
+      }
 
-    left: -30px;
-}
+      .quoteBox button {
+        background: rgba(23, 124, 229);
 
+        color: white;
 
-.quoteBox div{
-    width: 100%;
+        border-radius: 25px;
 
-    margin-top: 50px;
+        border: 2px solid rgba(23, 124, 229);
 
-    display: flex;
+        width: 150px;
 
-    justify-content: center;
-}
+        height: 50px;
 
-.quoteBox button{
-    background: rgba(23, 124, 229);
+        display: flex;
 
-    color: white;
+        align-items: center;
 
-    border-radius: 25px ;
+        justify-content: center;
 
-    border: 2px solid rgba(23, 124, 229);
+        margin: 5px;
 
-    width: 150px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="quoteBox">
+      <h2>Quote of The Day-by Rup</h2>
+      <blockquote id="quote">Loading...</blockquote>
 
-    height: 50px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    margin: 5px;
-
-    cursor: pointer;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</style>
-
-</head>
-<body>
-
-
-<div class="quoteBox">
-    <h2> Quote of The Day </h2>
-    <blockquote id="quote" > Loading... </blockquote>
-
-    <span id="author" > Loading... </span>
-
-    <div>
-        
-
-<button onclick = "getQuote(apiUrl)" >New Quote</button>
-<button onclick="tweet()" >Tweet</button>
-
+      <span id="author"> Loading... </span>
+
+      <div>
+        <button onclick="getQuote(apiUrl)">New Quote</button>
+        <button onclick="tweet()">Tweet</button>
+      </div>
     </div>
-</div>
 
+    <script>
+      let quote = document.getElementById("quote");
+      let author = document.getElementById("author");
 
+      let apiUrl = "https://api.quotable.io/random";
 
+      async function getQuote(url) {
+        let response = await fetch(url);
+        let data = await response.json();
+        // console.log(data)
 
+        quote.innerHTML = data.content;
+        author.innerHTML = data.author;
+      }
 
+      getQuote(apiUrl);
 
-<script>
-
-    let quote = document.getElementById("quote") 
-    let author = document.getElementById("author")
-
-
-let apiUrl = "https://api.quotable.io/random"
-
-async function getQuote(url){
-    let response = await fetch(url)
-    let data = await response.json()
-    // console.log(data)
-
-    quote.innerHTML = data.content
-    author.innerHTML = data.author
-
-
-}
-
-
-getQuote(apiUrl)
-
-function tweet() {
-    window.open("https://twitter.com/intent/tweet?text=" + quote.innerHTML + "--- by" + author.innerHTML, "Tweet Window", "width = 600", "height = 300")
-}
-
-</script>
-    
-</body>
+      function tweet() {
+        window.open(
+          "https://twitter.com/intent/tweet?text=" +
+            quote.innerHTML +
+            "--- by" +
+            author.innerHTML,
+          "Tweet Window",
+          "width = 600",
+          "height = 300"
+        );
+      }
+    </script>
+  </body>
 </html>
